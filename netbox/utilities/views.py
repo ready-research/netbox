@@ -101,7 +101,7 @@ class GetReturnURLMixin:
         # First, see if `return_url` was specified as a query parameter or form data. Use this URL only if it's
         # considered safe.
         return_url = request.GET.get('return_url') or request.POST.get('return_url')
-        if return_url and return_url.startswith('/'):
+        if return_url and re.match(r'^/[a-z]+', return_url):
             return return_url
 
         # Next, check if the object being modified (if any) has an absolute URL.
